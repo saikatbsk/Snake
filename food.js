@@ -1,10 +1,12 @@
 Food = function() {
-    this.x = 0;
-    this.y = 0;
+    this.x = (floor(random(width)/Scale) * Scale);
+    this.y = (floor(random(height)/Scale) * Scale);
+    this.y = constrain(this.y, bannerH, height-Scale);
 
     this.pickLocation = function() {
-        this.x = (floor(floor(random(width))/Scale) * Scale);
-        this.y = (floor(floor(random(height))/Scale) * Scale);
+        this.x = (floor(random(width)/Scale) * Scale);
+        this.y = (floor(random(height)/Scale) * Scale);
+        this.y = constrain(this.y, bannerH, height-Scale);
     }
 
     this.show = function() {

@@ -1,6 +1,6 @@
 Snake = function() {
     this.x = 0;
-    this.y = 0;
+    this.y = bannerH;
 
     this.xSpeed = 0;
     this.ySpeed = 0;
@@ -48,7 +48,7 @@ Snake = function() {
         this.y = this.y + this.ySpeed*Scale;
 
         this.x = constrain(this.x, 0, width-Scale);
-        this.y = constrain(this.y, 0, height-Scale);
+        this.y = constrain(this.y, bannerH, height-Scale);
     }
 
     this.show = function() {
