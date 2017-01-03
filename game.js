@@ -1,13 +1,25 @@
+/*
+ * TODO:
+ * 1. Display FPS, arena dimensions
+ * 2. Save state while changing FPS and load when done
+ * 3. Some button/option to display key bindings
+ */
+
 var snake;
 var food;
 var Scale = 12;
 var fps = 6;
-var bannerH = 60;
+var maxfps = 15;
+var minfps = 5;
+var arenaWidth = 480;
+var maxArenaWidth = 480;
+var minArenaWidth = 276;
+var bannerHeight = 60;
 var score = 0;
 var lives = 9;
 
 function setup() {
-    createCanvas(480, 480+bannerH);
+    createCanvas(arenaWidth, arenaWidth+bannerHeight);
     snake = new Snake();
     food = new Food();
     frameRate(fps);
@@ -30,22 +42,22 @@ function draw() {
 
         stroke(48, 120, 168);
         fill(48, 120, 168);
-        rect(0, 0, width, bannerH);
+        rect(0, 0, width, bannerHeight);
 
         fill(214, 216, 218);
         textSize(20);
         textFont('Monospace');
         textAlign(LEFT, CENTER);
-        text('Score: ' + score, 20, floor(bannerH/2));
+        text('Score: ' + score, 20, floor(bannerHeight/2));
         textAlign(RIGHT, CENTER);
-        text('Lives: ' + lives, width-20, floor(bannerH/2));
+        text('Lives: ' + lives, width-20, floor(bannerHeight/2));
 
         stroke(0, 0, 0);
     }
     else {
         stroke(48, 120, 168);
         fill(214, 216, 218);
-        textSize(60);
+        textSize(40);
         textFont('Monospace');
         textAlign(CENTER, CENTER);
         text('GAME OVER', floor(width/2), floor(height/2)-60);
@@ -69,6 +81,31 @@ function keyPressed() {
         snake.direction(1, 0);
     } else if (lives === 0 && keyCode === 32) {
         lives = 9;
+        score = 0;
+        setup();
+    } else if (lives > 0 && keyCode === 32) {
+        lives = 9;
+        score = 0;
+        setup();
+    } else if (width < maxArenaWidth && lives > 0 && keyCode === 190) {
+        lives = 9;
+        score = 0;
+        arenaWidth += 12;
+        setup();
+    } else if (width > minArenaWidth && lives > 0 && keyCode === 188) {
+        lives = 9;
+        score = 0;
+        arenaWidth -= 12;
+        setup();
+    } else if (fps < maxfps && keyCode === 187) {
+        lives = 9;
+        score = 0;
+        fps++;
+        setup();
+    } else if (fps > minfps && keyCode === 189) {
+        lives = 9;
+        score = 0;
+        fps--;
         setup();
     }
 }
